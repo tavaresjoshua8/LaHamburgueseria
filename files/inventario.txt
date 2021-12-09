@@ -1,0 +1,21 @@
+Ingrediente, Tocino, 500
+Ingrediente, Ketchup, 497
+Ingrediente, Pechuga, 1000
+Ingrediente, Tomate, 497
+Ingrediente, Lechuga, 297
+Ingrediente, Cebolla, 497
+Ingrediente, Queso Manchego, 500
+Ingrediente, Jalapeno, 300
+Ingrediente, Mayonesa, 497
+Ingrediente, Salsa de BBQ, 200
+Ingrediente, Mostaza, 497
+Ingrediente, Salami, 400
+Ingrediente, Jamon, 493
+Ingrediente, Carne, 1195
+Ingrediente, Queso Americano, 495
+Ingrediente, Pepinillo, 297
+Ingrediente, Salsa de tomate, 200
+Ingrediente, Pepperoni, 300
+Complemento, Refrescos, 2200
+Complemento, Boneless, 1200
+Complemento, Papas Fritas, 1200

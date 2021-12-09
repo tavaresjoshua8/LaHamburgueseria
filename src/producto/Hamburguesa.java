@@ -3,6 +3,8 @@ package producto;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import file.Almacen;
+
 public class Hamburguesa extends Producto {
     private String tipo = "Sencilla";
     private ArrayList <Ingrediente> ingredientes = new ArrayList<>();
@@ -10,7 +12,7 @@ public class Hamburguesa extends Producto {
     public Hamburguesa(Hamburguesa hamburguesa) {
         super(NOMBRE, hamburguesa.precio);
         this.setTipo(hamburguesa.tipo);
-        this.ingredientes = hamburguesa.ingredientes;
+        this.setIngredientes(hamburguesa.getIngredientes());
     }
 
     public Hamburguesa(double precio, String tipo, Ingrediente[] ingredientes) {
@@ -57,6 +59,17 @@ public class Hamburguesa extends Producto {
 
     // Metodos
     public void agregarIngrediente(Ingrediente ingrediente) {
+        // Buscamos si tenemos suficientes ingredientes
+        int disponible = Almacen.getCantidad(ingrediente.nombre);
+        if(disponible < ingrediente.getCantidad()) {
+            System.err.println(this.tipo);
+            System.err.println("ERROR: No tenemos suficiente " + ingrediente.nombre);
+            System.err.println("Disponible: " + disponible);
+            return;
+        }
+        // Ya verificamos que tenemos suficiente, hay que retirarlo del almacen
+        Almacen.quitarCantidad(ingrediente.nombre, ingrediente.getCantidad());
+
         if(this.ingredientes.contains(ingrediente)) { // Si ya cuenta con ese ingrediente, se cambia la cantidad
             Ingrediente temp = this.ingredientes.get(this.ingredientes.indexOf(ingrediente));
             temp.setCantidad(temp.getCantidad() + ingrediente.getCantidad());
@@ -77,6 +90,11 @@ public class Hamburguesa extends Producto {
             precio += i.getPrecio();
         }
         return precio;
+    }
+
+    @Override
+    public String getNombre() {
+        return this.nombre + " " + this.tipo;
     }
 
     // Static Variables

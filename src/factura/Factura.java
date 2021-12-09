@@ -9,7 +9,7 @@ public class Factura {
     private ArrayList<Producto> productos = new ArrayList<Producto>();
     private Cliente cliente;
 
-    public Factura() { }
+    public Factura() { cliente = new Cliente(); }
 
     public Factura(Cliente cliente) {
         this.cliente = cliente;

@@ -4,25 +4,19 @@ import java.util.Scanner;
 
 import cliente.Cliente;
 import factura.Factura;
+import file.Almacen;
+import file.Ventas;
+import predefined.Hamburguesas;
 import predefined.Ingredientes;
-import producto.acompañante.*;
-import producto.Acompañante;
+import producto.Complemento;
 import producto.Hamburguesa;
 import producto.Ingrediente;
 import producto.Producto;
+import producto.complementos.*;
 
 public abstract class Hamburgueseria {
     private final static Scanner input = new Scanner(System.in);
-    private final static String NOMBRE = "La Hamburgueseria";
     private final static ArrayList<Factura> facturas = new ArrayList<Factura>();
-    private static Hamburguesa[] hamburguesas={
-        new Hamburguesa(35,"Sencilla",Ingredientes.SENCILLA),
-        new Hamburguesa(55,"Doble",Ingredientes.DOBLE),
-        new Hamburguesa(75,"HamburPizza",Ingredientes.HAMBURPIZZA),
-        new Hamburguesa(75,"Carnivora",Ingredientes.CARNIVORA),
-        new Hamburguesa(45,"Chicken Burguer",Ingredientes.CHIKENBURGUER),
-        new Hamburguesa(45,"BBQ",Ingredientes.BBQ)
-    };
 
     // main
     public static void main(String[] args) {
@@ -42,7 +36,7 @@ public abstract class Hamburgueseria {
                         while(true) {
                             int opcionProducto = menuProducto();
                             String tamaño = null;
-                            Acompañante complemento = null;
+                            Complemento complemento = null;
 
                             if(opcionProducto == 0) break;
 
@@ -57,7 +51,8 @@ public abstract class Hamburgueseria {
                                     
                                     if(opcionHamburguesa == 0) break;
 
-                                    Hamburguesa hamburguesa = (hamburguesas[opcionHamburguesa - 1]).clone();
+                                    int i = opcionHamburguesa;
+                                    Hamburguesa hamburguesa = new Hamburguesa(Hamburguesas.precios[i-1], Hamburguesas.nombres[i-1], Hamburguesas.ingredientes[i-1]);
                                     System.out.print("Desea agregar ingredientes extra? s/n: ");
                                     if(input.nextLine().charAt(0) == 's') {
                                         while(true) {
@@ -80,7 +75,7 @@ public abstract class Hamburgueseria {
                                         }
                                     }
                                     factura.agregarProducto(hamburguesa);
-                                    System.out.println("Se ha agregado " + hamburguesa.getNombre() + " " + hamburguesa.getTipo() + ": $" + hamburguesa.getPrecio());
+                                    System.out.println("Se ha agregado " + hamburguesa.getNombre() + ": $" + hamburguesa.getPrecio());
                                     break;
                                 case 2:
                                     String salsa=menuSalsa();
@@ -130,9 +125,35 @@ public abstract class Hamburgueseria {
                     facturas.add(factura);
                     break;
                 case 2:
-                    break;
-                
+                    while(true) {
+                        int opcionAlmacen = menuAlmacen();
+                        if(opcionAlmacen == 0) break;
+
+                        switch(opcionAlmacen) {
+                            case 1:
+                                System.out.println("============ Ingredientes ============");
+                                Almacen.mostrar(Almacen.getIngredientes());
+                                System.out.println("============ Complementos ============");
+                                Almacen.mostrar(Almacen.getComplementos());
+                                break;
+                                case 2:
+                                    while(true) {
+                                        System.out.println("======================================");
+                                        Almacen.mostrar(Almacen.getAlmacen());
+                                        System.out.println("======================================");
+
+                                        System.out.println("Ingrese el nombre del objeto a cambiar: ");
+                                        String nombre = input.nextLine();
+
+                                        if(nombre.equals("0")) break;
+
+                                        int cantidad = leerEntero("Ingrese la cantidad que se le asignara: ", 99999);
+                                        Almacen.setCantidad(nombre, cantidad);
+                                    }
+                        }
+                    }
             }
+            Ventas.guardarVenta(factura);
         };
 
         //corte de caja
@@ -153,6 +174,15 @@ public abstract class Hamburgueseria {
         System.out.println("1.- Ingresar pedido");
         System.out.println("2.- Ingresar en almacen");
         System.out.println("0.- Corte caja");
+        System.out.println("=============================================");
+        
+        return leerEntero("Ingrese la accion: ", 2);
+    }
+    
+    public static int menuAlmacen() {
+        System.out.println("=============================================");
+        System.out.println("1.- Mostrar Inventario");
+        System.out.println("2.- Modificar Inventario");
         System.out.println("=============================================");
 
         return leerEntero("Ingrese la accion: ", 2);

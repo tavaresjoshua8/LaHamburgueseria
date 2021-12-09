@@ -3,9 +3,11 @@ package cliente;
 public class Cliente {
     private static int contador = 0;
     private int noCliente = ++contador;
-    private String RFC;
-    private String razonSocial;
-    private String correo;
+    private String RFC = "Desconocido";
+    private String razonSocial = "Desconocido";
+    private String correo = "Desconocido";
+
+    public Cliente() { }
 
     public Cliente(String RFC, String razonSocial, String correo) {
         this.setRFC(RFC);
