@@ -5,8 +5,8 @@ import producto.Acompañante;
 public class Refresco extends Acompañante {
     private String sabor = "Manzana";
 
-    public Refresco(String tamaño, double precio, String sabor) {
-        super("Refresco", precio, tamaño);
+    public Refresco(String tamaño, String sabor) {
+        super("Refresco", tamaño);
         this.setSabor(sabor);
     }
 

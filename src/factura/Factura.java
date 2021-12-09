@@ -9,6 +9,8 @@ public class Factura {
     private ArrayList<Producto> productos = new ArrayList<Producto>();
     private Cliente cliente;
 
+    public Factura() { }
+
     public Factura(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -16,12 +18,12 @@ public class Factura {
     @Override
     public String toString() {
         String factura = "";
-        factura += "Cliente: " + cliente.getRazonSocial() + "\n";
+        factura += this.cliente + "\n";
         factura += "Productos: \n";
         for (Producto producto : productos) {
             factura += producto.toString();
         }
-        factura += "Total: " + this.calcularTotal() + "\n";
+        factura += "Total: $" + this.calcularTotal() + "\n";
         return factura;
     }
 

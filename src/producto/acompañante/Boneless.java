@@ -5,8 +5,8 @@ import producto.Acompañante;
 public class Boneless extends Acompañante {
     private String tipoSalsa = "Aderezo";
     
-    public Boneless(String tamaño, double precio, String tipoSalsa) {
-        super("Boneless", precio, tamaño);
+    public Boneless(String tamaño, String tipoSalsa) {
+        super("Boneless", tamaño);
         this.setTipoSalsa(tipoSalsa);
     }
 

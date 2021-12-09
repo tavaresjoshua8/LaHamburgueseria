@@ -7,6 +7,12 @@ public class Hamburguesa extends Producto {
     private String tipo = "Sencilla";
     private ArrayList <Ingrediente> ingredientes = new ArrayList<>();
 
+    public Hamburguesa(Hamburguesa hamburguesa) {
+        super(NOMBRE, hamburguesa.precio);
+        this.setTipo(hamburguesa.tipo);
+        this.ingredientes = hamburguesa.ingredientes;
+    }
+
     public Hamburguesa(double precio, String tipo, Ingrediente[] ingredientes) {
         super(NOMBRE, precio);
         this.setTipo(tipo);
@@ -27,6 +33,11 @@ public class Hamburguesa extends Producto {
                 + "\tPrecio: " + this.precio + "\n"
                 + "\tIngredientes: \n" + ingredientes
                 + (ingredientesExtra.isEmpty() ? "" : "\tExtras:\n" + ingredientesExtra);
+    }
+
+    @Override
+    public Hamburguesa clone() {
+        return new Hamburguesa(this);
     }
 
     // Getters
@@ -54,13 +65,9 @@ public class Hamburguesa extends Producto {
         }
     }
 
-    public void quitarIngrediente(Ingrediente ingrediente) {
-        for(Ingrediente i : this.ingredientes) {
-            if(i.nombre.equals(ingrediente.nombre)) {
-                i.setCantidad(i.getCantidad() - ingrediente.getCantidad());
-                break;
-            }
-        }
+    public void quitarIngrediente(int index) {
+        System.out.println("Se ha eliminado " + this.ingredientes.get(index).getNombre() + ".");
+        this.ingredientes.remove(index);
     }
 
     @Override

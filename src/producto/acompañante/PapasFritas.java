@@ -5,8 +5,8 @@ import producto.Acompañante;
 public class PapasFritas extends Acompañante {
     private String aderezo = "Queso";
 
-    public PapasFritas(String tamaño, double precio, String aderezo) {
-        super("Papas Fritas", precio, tamaño);
+    public PapasFritas(String tamaño, String aderezo) {
+        super("Papas Fritas", tamaño);
         this.setAderezo(aderezo);
     }
 

@@ -4,6 +4,10 @@ public class Producto {
     protected String nombre = "No definido";
     protected double precio = 0.0;
 
+    public Producto(String nombre) {
+        this.setNombre(nombre);
+    }
+
     public Producto(String nombre, double precio) {
         this.setNombre(nombre);
         this.setPrecio(precio);
